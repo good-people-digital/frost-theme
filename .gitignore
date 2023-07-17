@@ -1,0 +1,13 @@
+.tmp
+*.log
+/build
+/vendor
+node_modules
+/theme.json
+/assets/css
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
