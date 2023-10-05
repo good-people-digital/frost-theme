@@ -4,7 +4,6 @@
  * Slug: frost/footer-three-columns-dark
  * Categories: footer
  * Block Types: core/template-part/footer
- * Viewport Width: 1280
  */
 ?>
 <!-- wp:group {"align":"full","style":{"elements":{"link":{"color":{"text":"var:preset|color|base"}}},"spacing":{"padding":{"top":"var:preset|spacing|small","bottom":"var:preset|spacing|small"},"margin":{"top":"0px"}}},"backgroundColor":"contrast","textColor":"base","className":"has-background-color","layout":{"type":"constrained"},"fontSize":"small"} -->
@@ -12,7 +11,7 @@
 <!-- wp:group {"align":"wide","layout":{"type":"flex","allowOrientation":false,"justifyContent":"space-between"}} -->
 <div class="wp-block-group alignwide">
 <!-- wp:paragraph -->
-<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> Your Company LLC</p>
+<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html__( 'Your Company LLC', 'frost' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph -->
 <p><a href="#"><?php echo esc_html__( 'Privacy Policy', 'frost' ); ?></a> · <a href="#"><?php echo esc_html__( 'Terms of Service', 'frost' ); ?></a> · <a href="#"><?php echo esc_html__( 'Contact Us', 'frost' ); ?></a></p>
