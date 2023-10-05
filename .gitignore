@@ -4,7 +4,6 @@
 /vendor
 node_modules
 /theme.json
-/assets/css
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json

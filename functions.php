@@ -8,6 +8,9 @@
  * @link    https://frostwp.com/
  */
 
+include_once get_template_directory() . '/includes/functions-blocks.php';
+include_once get_template_directory() . '/includes/functions-shortcodes.php';
+
 if ( ! function_exists( 'frost_setup' ) ) {
 
 	/**
@@ -42,9 +45,10 @@ add_action( 'after_setup_theme', 'frost_setup' );
 
 // Enqueue style sheet.
 add_action( 'wp_enqueue_scripts', 'frost_enqueue_style_sheet' );
+
 function frost_enqueue_style_sheet() {
 
-	wp_enqueue_style( 'frost', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'goodpeopledigital', get_template_directory_uri() . '/style.css');
 
 }
 
@@ -122,51 +126,3 @@ function frost_register_block_pattern_categories() {
 
 add_action( 'init', 'frost_register_block_pattern_categories' );
 
-function get_related_articles_by_category($atts) {
-    $atts = shortcode_atts(array(), $atts);
-
-    $current_post_id = get_the_ID();
-    $categories = get_the_category($current_post_id);
-
-    if ($categories) {
-        $category_ids = array();
-        foreach ($categories as $category) {
-            $category_ids[] = $category->term_id;
-        }
-
-        $args = array(
-            'posts_per_page' => 4,
-            'category__in' => $category_ids,
-            'post__not_in' => array($current_post_id),
-            'orderby' => 'date',
-            'order' => 'DESC' // Sort in descending order (newest first)
-        );
-
-        $query = new WP_Query($args);
-
-        if ($query->have_posts()) {
-            $output .= '<h2 class="wp-block-heading has-text-align-left has-contrast-color has-text-color has-max-48-font-size">See other articles</h2>';
-            $output .= '<ul class="wp-block-latest-posts__list has-link-color has-text-color has-contrast-color wp-block-latest-posts">';
-
-            while ($query->have_posts()) {
-                $query->the_post();
-                $output .= '<li><a class="wp-block-latest-posts__post-title" href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
-            }
-
-            $output .= '</ul>';
-
-            // Get the first category of the current post
-            $first_category = reset($categories);
-            $category_link = get_category_link($first_category);
-
-            $output .= '<p class="more-articles has-contrast-color has-text-color has-link-color"><a href="' . $category_link . '">See all articles</a></p>';
-
-            wp_reset_postdata();
-
-            return $output;
-        }
-    }
-
-    return 'No related articles found.';
-}
-add_shortcode('related_articles', 'get_related_articles_by_category');
